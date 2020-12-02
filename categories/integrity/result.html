@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>诚信码</title>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0" />
+
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="../../assets/custom.css">
+
+</head>
+
+<body class='bg-cloud'>
+
+    <div class="container d-flex h-100">
+        <div class="row justify-content-center align-self-center">
+
+            <div class="col-md-6 align-self-center">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal" id='card-header-text'>您的诚信码</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <img src="../../assets/width-placeholder.png" class="img-fluid">
+                            <img id='indicator' class="img-fluid" style="width:50%">
+
+                        </ul>
+                        <h4 class="mt-3 mb-4" id='text-1'></h4>
+                        <div class="btn btn-primary btn-lg btn-block"><span id='time'></span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Scripts -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+    <script src="../../libs/qrcode.min.js"></script>
+    <script>
+        let queryString = window.location.search;
+        let urlParams = new URLSearchParams(queryString);
+        let name = urlParams.get('name');
+        let gender = urlParams.get('gender');
+        let type = urlParams.get('type');
+        let datetime = urlParams.get('time');
+
+        if (gender === 'male') gender = '先生';
+        else if (gender === 'female') gender = '女士';
+        else if (gender === 'none') gender = '同志';
+        if (name === '') {
+            name = '您';
+            gender = '';
+        }
+
+        let color;
+
+        if (type === 'bad') {
+            color = "#E53122"
+            $('#indicator').attr('src', '../../assets/red.png');
+            $('#text-1').html('红色').css('color', color);
+        } else if (type === 'ok') {
+            color = '#F7BB00';
+            $('#indicator').attr('src', '../../assets/yellow.png');
+            $('#text-1').html('黄色').css('color', color);
+        } else {
+            color = "#53B15E"
+            $('#indicator').attr('src', '../../assets/green.png');
+            $('#text-1').html('绿色').css('color', color);
+        }
+        $('#card-header-text').html(`${name}${gender}的诚信码`);
+
+        let d = new Date(datetime);
+        let formatted = `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()} ${d.toLocaleTimeString().slice(0,-3)}`
+
+        $('#time').html(' ' + formatted);
+    </script>
+    <style>
+        #qrcode canvas+img {
+            width: 100%;
+            height: 100%;
+            max-width: 100%
+        }
+    </style>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+body {
+    background-color: #F3FFFF;
+    height: 100vh !important;
+}
+
+.navbar{
+  background-color: rgba(0,0,0,.03);
+  border-bottom: 1px solid rgba(0,0,0,.125);
+  padding: .1rem .5rem;
+}
+
+.pricing-header{
+  width: 80%;
+  background-image: url("smartcity.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 5rem!important;
+  padding-bottom: 3rem!important;
+}
+
+.lead{
+  padding: 5% 5% 0 5%;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.form-group{
+  margin-bottom: 2rem;
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>孝顺码</title>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0" />
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../assets/custom.css">
+
+</head>
+
+<body class='bg-cloud'>
+    <div class="container d-flex h-100">
+        <div class="row justify-content-center align-self-center">
+            <div class="col-md-6 align-self-center">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal" id='card-header-text'>您的孝顺码</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <div id='qrcode'>
+                            </div>
+                        </ul>
+                        <ul class="list-unstyled">
+                            <li id='text-1'></li>
+                            <li id='text-2'></li>
+                            <li id='text-3'></li>
+                        </ul>
+                        <div class="btn btn-lg btn-block" id='warning'>请主动出示配合检查 </div>
+                    </div>
+                </div>
+                <img src="../../assets/width-placeholder.png" class="img-fluid">
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        let queryString = window.location.search;
+        let urlParams = new URLSearchParams(queryString);
+        let name = urlParams.get('name');
+        let gender = urlParams.get('gender');
+        let type = urlParams.get('type');
+        console.log("We stored the data in the URL. The data we grabbed from the URL is: ");
+        console.log("Your name", name);
+        console.log("Your gender", gender);
+        console.log("Your code type", type);
+        console.log("Hence generating the code");
+
+        if (gender === 'male') gender = '先生';
+        else if (gender === 'female') gender = '女士';
+        else if (gender === 'none') gender = '同志';
+        if (name === '') {
+            name = '您';
+            gender = '';
+        }
+
+        let color;
+
+        if (type === 'bad') {
+            color = "#E53122"
+            $('#text-1').html('孝顺指数低！');
+            $('#text-2').html('需引起高度注意，');
+            $('#text-3').html('并限制通行。');
+        } else if (type === 'ok') {
+            color = '#F7BB00';
+            $('#text-1').html('孝顺指数中等！');
+            $('#text-2').html('需引起注意，');
+            $('#text-3').html('并加强观察。');
+        } else {
+            color = "#53B15E"
+            $('#text-1').html('孝顺指数正常。');
+            $('#text-2').html('可正常通行。');
+            $('#text-3').html('');
+        }
+
+        let url = 'https://' + window.location.host + "/categories/filial-piety/result.html" + window.location.search +
+            "&time=" + new Date().toISOString();
+        console.log("The QR code will then take you to the result page at", url);
+
+
+        $('#card-header-text').html(`${name}${gender}的孝顺码`);
+        let qrcode = new QRCode(document.getElementById("qrcode"), {
+            text: url,
+            width: 256,
+            height: 256,
+            colorDark: color,
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.L
+        });
+
+    </script>
+    <style>
+        #qrcode canvas+img {
+            width: 100%;
+            max-width: 100%
+        }
+    </style>
+</body>
+
+</html>
