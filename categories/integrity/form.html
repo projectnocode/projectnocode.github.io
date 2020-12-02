@@ -254,14 +254,14 @@
       // quesiton 1 & 2
       if ($('#question-1-2').prop('checked')) type = 'ok';
       if ($('#question-2-2').prop('checked')) type = 'ok';
-      console.log("If Question 1 or 2 is checked yes, you will get a yellow code")
+      console.log("If Question 1 or 2 is checked yes, return a yellow code")
       // quesiton 3 & 4
       for (let i = 1; i < 7; i++) {
         let id = '#question-4-' + i;
         if ($(id).prop('checked')) type = 'bad';
       }
       if ($('#question-3-2').prop('checked')) type = 'bad';
-      console.log("If Question 3 or 4 is checked yes, you will get a red code")
+      console.log("If Question 3 or 4 is checked yes, return a red code")
 
       console.log("The code is", type);
 

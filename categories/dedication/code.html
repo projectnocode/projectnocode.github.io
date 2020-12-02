@@ -45,11 +45,10 @@
         let name = urlParams.get('name');
         let gender = urlParams.get('gender');
         let type = urlParams.get('type');
-        console.log("We stored the data in the URL. The data we grabbed from the URL is: ");
-        console.log("Your name", name);
-        console.log("Your gender", gender);
-        console.log("Your code type", type);
-        console.log("Hence generating the code");
+        console.log("The data is stored in the URL. The data from the URL is: ");
+        console.log("Input name", name);
+        console.log("Input gender", gender);
+        console.log("Return code type", type);
 
         if (gender === 'male') gender = '先生';
         else if (gender === 'female') gender = '女士';
@@ -80,7 +79,7 @@
 
         let url = 'https://' + window.location.host + "/categories/dedication/result.html" + window.location.search +
             "&time=" + new Date().toISOString();
-        console.log("The QR code will then take you to the result page at", url);
+        console.log("The QR code will then take the user to the result page at", url);
 
 
         $('#card-header-text').html(`${name}${gender}的敬业码`);
