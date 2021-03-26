@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'iPix';
+    src: url('../../assets/ipix.min.ttf');
+}
+
+body {
+    font-family: 'iPix';
+}
